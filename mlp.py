@@ -97,7 +97,7 @@ class MLP:
             weights += derivatives * learning_rate
             # print("Updated W{} {}".format(i, weights))
 
-    def train(self, inputs: list, targets: list, epochs: int, learning_rate: float) -> None:
+    def train(self, inputs: list, targets: list, epochs: int, learning_rate: float, verbose: bool) -> None:
         
         for i in range(epochs):
             sum_error = 0
@@ -120,7 +120,8 @@ class MLP:
                 sum_error += self._mse(target, output)
             
             # report error
-            print("Error: {} at epoch: {}".format(sum_error/len(inputs), i))
+            if verbose:
+                print("Error: {} at epoch: {}".format(sum_error/len(inputs), i))
 
         print("Training complete!")
         print("===================")
@@ -139,7 +140,7 @@ if __name__ == "__main__":
     mlp = MLP(2, [5], 1)
 
     # train our mlp
-    mlp.train(items, targets, 50, 0.1)
+    mlp.train(items, targets, 100, 0.1, False)
 
     # create dummy data
     input = np.array([0.3, 0.1])
